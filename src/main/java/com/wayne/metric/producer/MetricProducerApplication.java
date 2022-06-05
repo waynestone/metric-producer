@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.StdDateFormat;
 import com.glodon.platform.gdc.metricclient.EnableMetricClients;
 import com.glodon.platform.gdc.metricclient.GDCMetricExports;
+import io.micrometer.core.aop.CountedAspect;
+import io.micrometer.core.aop.TimedAspect;
+import io.micrometer.core.instrument.MeterRegistry;
 import io.prometheus.client.exporter.HTTPServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -45,5 +48,15 @@ public class MetricProducerApplication {
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(list);
         return mappingJackson2HttpMessageConverter;
     }
+
+//    @Bean
+//    public TimedAspect timedAspect(MeterRegistry registry) {
+//        return new TimedAspect(registry);
+//    }
+//
+//    @Bean
+//    public CountedAspect countedAspect(MeterRegistry registry) {
+//        return new CountedAspect(registry);
+//    }
 
 }

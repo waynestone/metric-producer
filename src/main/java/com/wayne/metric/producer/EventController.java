@@ -2,7 +2,6 @@ package com.wayne.metric.producer;
 
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.metrics.web.servlet.WebMvcTagsProvider;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -19,8 +18,11 @@ import java.util.Date;
 @RequestMapping("/events")
 public class EventController {
 
+//    @Autowired
+//    private WebMvcTagsProvider webMvcTagsProvider;
+
     @Autowired
-    private WebMvcTagsProvider webMvcTagsProvider;
+    private MetricService metricService;
 
     @GetMapping("/get")
     public ResponseEntity<ServiceTagVO> get() {
@@ -31,7 +33,15 @@ public class EventController {
 
     @RequestMapping(value = "/a5/{num}", method = RequestMethod.GET)
     public String a5(@PathVariable("num") String num) {
-        Integer.valueOf(num);
+//        GDCCustomCollection.getInstance().recordCounter("wayne","None");
+//        GDCCustomCollection.getInstance().recordGauge("gdc_handle_test","gdc","wayne",30);
+
+
+
+        metricService.test01();
+        metricService.test02(num);
+
+        //Integer.valueOf(num);
         return "a5,ok:" + num + " --" + System.currentTimeMillis();
     }
 }
